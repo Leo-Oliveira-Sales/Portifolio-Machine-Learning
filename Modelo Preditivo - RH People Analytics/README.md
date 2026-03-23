@@ -1,10 +1,8 @@
 # Modelo Preditivo - People Analytics
 
----
 
 ## Identificando e prevendo os fatores que contribuem para a satisfação dos funcionários
 
----
 
 #### O que são as análises de People Analytics¶
 People analytics é um processo de coleta e análise de dados voltado para a gestão de pessoas em empresas. 
