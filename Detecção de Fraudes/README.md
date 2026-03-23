@@ -2,6 +2,8 @@
 
 ## 📌 Visão Geral do Projeto
 
+---
+
 Com o crescimento das criptomoedas, aumentaram também os riscos relacionados a **fraudes financeiras e atividades maliciosas em redes blockchain**. Detectar esse tipo de comportamento manualmente é extremamente difícil devido ao grande volume de transações.
 
 Este projeto desenvolve um **modelo de Machine Learning capaz de identificar transações potencialmente fraudulentas** a partir de características comportamentais das transações.
@@ -19,231 +21,193 @@ O projeto inclui:
 
 ---
 
-# 🧠 Fluxo de Machine Learning
+## Objetivos do Projeto
 
-O projeto segue um fluxo padrão de ciência de dados:
+#### O projeto possui os seguintes objetivos principais:
 
-```
-Limpeza dos Dados
-        ↓
-Engenharia de Atributos
-        ↓
-Divisão Treino/Teste
-        ↓
-Pipeline de Pré-Processamento
-        ↓
-Treinamento do Modelo (XGBoost)
-        ↓
-Avaliação do Modelo
-        ↓
-Predições
-```
+Detectar automaticamente transações fraudulentas.
+
+Criar um pipeline de Machine Learning automatizado.
+
+Aplicar boas práticas de pré-processamento de dados.
+
+Construir um modelo escalável que possa ser utilizado em produção.
+
+Demonstrar um fluxo completo de Data Science aplicado a problemas reais.
 
 ---
 
-# 📊 Descrição do Dataset
+## Conjunto de Dados
 
-O dataset contém informações sobre **transações e comportamento de carteiras em blockchain**.
+O dataset utilizado contém informações sobre transações realizadas em blockchain, incluindo características como:
 
-Alguns exemplos de variáveis presentes no dataset:
+número de transações enviadas e recebidas
 
-| Variável                 | Descrição                              |
-| ------------------------ | -------------------------------------- |
-| sent tnx                 | número de transações enviadas          |
-| received tnx             | número de transações recebidas         |
-| avg val sent             | valor médio enviado                    |
-| avg val received         | valor médio recebido                   |
-| total ether sent         | total de ether enviado                 |
-| total ether received     | total de ether recebido                |
-| unique sent to addresses | número de endereços únicos interagidos |
+tempo entre transações
 
-Essas variáveis ajudam a identificar **padrões suspeitos de movimentação financeira**.
+valores mínimos e máximos transferidos
 
----
+quantidade de contratos criados
 
-# 🎯 Variável Alvo
+saldo total da carteira
 
-A variável utilizada para classificação foi:
+interações com tokens ERC20
 
-```
-flag
-```
-
-| Valor | Significado           |
-| ----- | --------------------- |
-| 0     | Transação legítima    |
-| 1     | Transação fraudulenta |
+#### Essas variáveis descrevem o comportamento financeiro de cada endereço na blockchain, permitindo identificar padrões associados a atividades fraudulentas.
 
 ---
 
-# ⚙️ Tecnologias Utilizadas
+## A variável alvo utilizada foi:
 
-Este projeto foi desenvolvido utilizando:
+## flag
 
-* Python
-* Pandas
-* Scikit-Learn
-* XGBoost
-* Joblib
-* Jupyter Notebook
+Durante a etapa de engenharia de atributos foram realizadas as seguintes operações:
 
----
+#### Limpeza dos nomes das colunas
 
-# 🧹 Pré-Processamento dos Dados
+Padronização para evitar inconsistências durante o processamento.
 
-O pré-processamento foi realizado utilizando **Pipelines do Scikit-Learn**, garantindo reprodutibilidade e evitando vazamento de dados.
-
-## Padronização dos nomes das colunas
-
-```
-df.columns = df.columns.str.strip().str.lower()
-```
-
-## Tratamento de valores ausentes
-
-Valores faltantes foram preenchidos utilizando a **média da variável**.
-
-```
-SimpleImputer(strategy="mean")
-```
-
-## Padronização das variáveis
-
-Foi aplicado **StandardScaler** para normalizar a escala dos dados.
-
-```
-StandardScaler()
-```
+    df.columns = df.columns.str.strip().str.lower()
 
 ---
 
-# 🧠 Modelo de Machine Learning
+#### Seleção de atributos
 
-O algoritmo utilizado foi **XGBoost (Extreme Gradient Boosting)**.
+Foram removidas variáveis irrelevantes ou redundantes.
 
-Esse modelo é amplamente utilizado em problemas de classificação devido à sua:
+    X = df[atributos]
+    y = df['flag']
 
-* alta performance
-* capacidade de lidar com dados complexos
-* robustez contra overfitting
+#### Verificação de variabilidade
 
-Configuração utilizada:
-
-```python
-XGBClassifier(
-    random_state=42,
-    eval_metric='auc',
-    objective='binary:logistic'
-)
-```
+Foi realizada análise de valores únicos por variável para garantir que os atributos possuam informação relevante para o modelo.
 
 ---
 
-# 🔄 Pipeline do Projeto
+## Pré-processamento dos Dados
 
-Todo o fluxo de dados foi implementado utilizando **Pipeline do Scikit-Learn**.
+O pré-processamento foi realizado utilizando Pipeline e ColumnTransformer do Scikit-Learn, garantindo reprodutibilidade e evitando vazamento de dados.
 
-Estrutura do pipeline:
+### As transformações aplicadas foram:
 
-```
-Imputação de valores faltantes
-        ↓
-Padronização das variáveis
-        ↓
-Modelo XGBoost
-```
+#### Tratamento de valores ausentes
 
-Isso garante que todas as transformações sejam aplicadas automaticamente durante o treinamento e durante as previsões.
+Valores faltantes foram substituídos pela média da variável.
 
----
+    SimpleImputer(strategy='mean')
+    
+#### Padronização dos dados
 
-# 📈 Avaliação do Modelo
+Aplicação do StandardScaler para normalizar a escala das variáveis.
 
-A principal métrica utilizada foi:
+    StandardScaler()
+    
+Pipeline de Pré-processamento
 
-### AUC — Área sob a Curva ROC
+Imputação → Padronização → Modelo
 
-Essa métrica mede a capacidade do modelo de **diferenciar transações legítimas de fraudulentas**.
-
-Valores próximos de **1 indicam excelente desempenho do modelo**.
+Isso garante que todas as etapas sejam executadas automaticamente durante o treinamento e previsão.
 
 ---
 
-# 🚀 Como Executar o Projeto
+##  Divisão Treino e Teste
 
-### 1️⃣ Clonar o repositório
+O conjunto de dados foi dividido em:
 
-```
-git clone https://github.com/seu_usuario/crypto-fraud-detection.git
-```
+80% treino | 20% teste
 
-### 2️⃣ Instalar as dependências
+Utilizando estratificação para preservar a proporção de fraudes no dataset.
 
-```
-pip install -r requirements.txt
-```
-
-### 3️⃣ Executar o notebook
-
-Abra o **Jupyter Notebook** e execute as células do projeto.
+    train_test_split(stratify=y)
 
 ---
 
-# 💾 Salvando o Modelo
+##  Modelo de Machine Learning
 
-Após o treinamento, o modelo pode ser salvo para uso posterior.
+O algoritmo escolhido foi o XGBoost (Extreme Gradient Boosting), amplamente utilizado em problemas de classificação devido à sua alta performance e robustez.
 
-```python
-joblib.dump(pipeline_final, "modelo_fraude.joblib")
-```
+* Configuração do modelo:
 
----
+        XGBClassifier(
+            random_state=42,
+            eval_metric='auc',
+            objective='binary:logistic'
+        )
 
-# 🔮 Fazendo Previsões
-
-O modelo salvo pode ser carregado para realizar previsões em novos dados.
-
-```python
-modelo = joblib.load("modelo_fraude.joblib")
-
-predicao = modelo.predict(novos_dados)
-```
+O modelo foi integrado ao pipeline para garantir que todo o fluxo de transformação seja aplicado automaticamente.
 
 ---
 
-# 🧩 Possíveis Aplicações
+##  Avaliação do Modelo
 
-A estrutura deste projeto pode ser utilizada em diversos problemas reais:
+A principal métrica utilizada foi AUC (Area Under the ROC Curve).
 
-* detecção de fraude em criptomoedas
-* fraude em cartões de crédito
-* análise de risco financeiro
-* detecção de comportamento suspeito
-* sistemas antifraude em fintechs
-* análise de anomalias em transações financeiras
+Essa métrica mede a capacidade do modelo de distinguir entre:
 
+transações legítimas | transações fraudulentas
+
+Valores de AUC próximos de 1 indicam excelente capacidade de classificação.
 
 ---
 
-# 📁 Estrutura do Projeto
+##  Pipeline Final
 
-```
-crypto-fraud-detection
-│
-├── data
-│   └── dataset.csv
-│
-├── notebooks
-│   └── fraud_detection.ipynb
-│
-├── models
-│   └── modelo_fraude.joblib
-│
-├── README.md
-└── requirements.txt
-```
+O pipeline completo inclui:
+
+1️⃣ Pré-processamento
+
+2️⃣ Treinamento do modelo
+
+3️⃣ Predição automática
+
+Isso permite que novos dados sejam processados da mesma forma que os dados de treinamento.
 
 ---
+
+##  Uso do Modelo em Produção
+
+Após o treinamento, o modelo pode ser salvo para uso em sistemas reais.
+
+    joblib.dump(pipeline_final, 'modelo_fraude.joblib')
+
+Posteriormente pode ser carregado para realizar previsões em novas transações.
+
+    modelo = joblib.load('modelo_fraude.joblib')
+
+---
+
+##  Aplicações do Projeto
+
+**Este tipo de modelo pode ser utilizado em diversos contextos:**
+
+Sistemas antifraude em criptomoedas
+
+Monitoramento de carteiras suspeitas em redes blockchain.
+
+Bancos e fintechs
+
+Detecção de padrões de fraude em transferências financeiras.
+
+Exchanges de criptomoedas
+
+Identificação de contas com comportamento suspeito.
+
+Monitoramento de risco financeiro
+
+Classificação automática de atividades potencialmente fraudulentas.
+
+----
+
+##  Conclusão
+
+Este projeto demonstrou a construção de um sistema de detecção de fraudes utilizando técnicas modernas de Machine Learning e engenharia de dados.
+
+A utilização de pipelines do Scikit-Learn garante um fluxo robusto, reprodutível e pronto para integração em sistemas reais.
+
+A metodologia aplicada pode ser facilmente adaptada para diversos problemas de classificação, tornando o modelo uma base sólida para aplicações em segurança financeira e análise de risco.
+
+
+
 
 # 👨‍💻 Autor
 
