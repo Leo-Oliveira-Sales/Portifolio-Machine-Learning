@@ -1,5 +1,7 @@
 # 🚨 Detecção de Fraudes em Criptomoedas com Machine Learning
 
+***Modelo de Classificação com metodo Ensemble***
+
 ## 📌 Visão Geral do Projeto
 
 ---
