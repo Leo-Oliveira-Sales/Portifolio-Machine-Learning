@@ -8,7 +8,7 @@ O projeto utiliza Python, Scikit-Learn e Pipeline de Machine Learning para const
 
 ## 🧠 Problema de Negócio
 
-A rotatividade de funcionários (attrition) é um dos principais desafios enfrentados por empresas.
+    A rotatividade de funcionários (attrition) é um dos principais desafios enfrentados por empresas.
 
 Quando um colaborador pede demissão, a empresa pode sofrer:
 
@@ -22,7 +22,7 @@ Quando um colaborador pede demissão, a empresa pode sofrer:
 
 #### O objetivo deste projeto é:
 
-Identificar os fatores que aumentam a probabilidade de um funcionário pedir demissão.
+    Identificar os fatores que aumentam a probabilidade de um funcionário pedir demissão.
 
 Com isso, o RH pode agir de forma preventiva para melhorar retenção de talentos e satisfação no trabalho.
 
@@ -32,13 +32,13 @@ Com isso, o RH pode agir de forma preventiva para melhorar retenção de talento
 
 #### Fonte dos dados:
 
-https://developer.ibm.com/patterns/data-science-life-cycle-in-action-to-solve-employee-attrition-problem/
+>> https://developer.ibm.com/patterns/data-science-life-cycle-in-action-to-solve-employee-attrition-problem/
 
 Dimensão do dataset:
 
-23.058 registros
+    23.058 registros
 
-30 variáveis
+    30 variáveis
 
 #### Tipos de variáveis:
 
@@ -48,9 +48,9 @@ Dimensão do dataset:
     Satisfação no trabalho
     Histórico de carreira
 
-#### Variável alvo:
+### Variável alvo:
 
-#### Attrition
+    Attrition
 
 Categorias originais:
 
@@ -70,23 +70,25 @@ A categoria Termination foi removida, pois representa decisão da empresa.
 ---
 
 ## 🧾 Dicionário das Variáveis (Principais)
-    Variável	Descrição
-    Age	Idade do colaborador
-    AgeStartedWorking	Idade em que começou a trabalhar
-    DistanceFromHome	Distância entre casa e trabalho
-    Education	Nível de escolaridade
-    EducationField	Área de formação
-    Gender	Gênero
-    JobRole	Cargo
-    MaritalStatus	Estado civil
-    MonthlyIncome	Salário mensal
-    NumCompaniesWorked	Número de empresas trabalhadas
-    OverTime	Realiza horas extras
-    PercentSalaryHike	Aumento salarial
-    TotalWorkingYears	Anos totais de experiência
-    YearsAtCompany	Tempo na empresa
-    YearsSinceLastPromotion	Anos desde última promoção
-    WorkLifeBalance	Equilíbrio vida-trabalho
+
+Variável	| Descrição
+----------|-------------
+Age	| Idade do colaborador
+AgeStartedWorking	| Idade em que começou a trabalhar
+DistanceFromHome	| Distância entre casa e trabalho
+Education	| Nível de escolaridade
+EducationField	| Área de formação
+Gender	| Gênero
+JobRole	| Cargo
+MaritalStatus	| Estado civil
+MonthlyIncome	| Salário mensal
+NumCompaniesWorked	| Número de empresas trabalhadas
+OverTime	| Realiza horas extras
+PercentSalaryHike	| Aumento salarial
+TotalWorkingYears	| Anos totais de experiência
+YearsAtCompany	| Tempo na empresa
+YearsSinceLastPromotion	| Anos desde última promoção
+WorkLifeBalance	| Equilíbrio vida-trabalho
 
 ---
 
@@ -260,21 +262,6 @@ Abra o notebook no Jupyter:
     └── requirements.txt
 
 ---
-
-## 📊 Aplicações do Projeto
-
-* Este projeto pode ser adaptado para:
-
-previsão de turnover de funcionários
-
-People Analytics
-
-análise de satisfação no trabalho
-
-retenção de talentos
-
-suporte à decisão em RH estratégico
-
 ---
 
 # 👨‍💻 Autor
